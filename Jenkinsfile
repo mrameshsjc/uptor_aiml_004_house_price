@@ -21,23 +21,6 @@ pipeline {
             }
         }
 
-        // ============================================================
-        // 2. Verify Windows Commands
-        // ============================================================
-        stage('Test Windows Commands') {
-            steps {
-                bat '''
-                    echo Checking required Windows commands...
-
-                    where powershell
-                    where timeout
-
-                    echo.
-                    echo PowerShell Version:
-                    powershell -NoProfile -Command "$PSVersionTable.PSVersion"
-                '''
-            }
-        }
 
         // ============================================================
         // 3. Set Up Python Virtual Environment
