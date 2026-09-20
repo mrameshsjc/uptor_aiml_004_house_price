@@ -90,6 +90,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                bat '''
+                    echo Building Docker image...
+
+                    docker build -t house-price-api:%BUILD_NUMBER% .
+
+                    echo Docker image built successfully.
+
+                    docker images house-price-api
+                '''
+            }
+        }
     }
 
     post {
@@ -106,7 +120,7 @@ pipeline {
         }
 
         success {
-            echo 'Build, train, smoke test, and Snyk dependency scan succeeded.'
+            echo 'Build, train, smoke test, Snyk dependency scan, and Docker build succeeded.'
         }
 
         failure {
